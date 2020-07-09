@@ -12,13 +12,55 @@ This information has been captured to aid my own personal efforts to automate sc
 
 The information is provided “as is”, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. in no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the informations or the use or mis-used or other dealings in the information.
 
-## List of libraries that implement this API
+## Table of contents
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [Legal Disclaimer](#legal-disclaimer)
+- [Table of contents](#table-of-contents)
+- [Known libraries implementing the API](#known-libraries-implementing-the-api)
+- [Contribute](#contribute)
+- [API](#api)
+  - [Authentication](#authentication)
+  - [Devices](#devices)
+    - [List Devices](#list-devices)
+  - [Device](#device)
+    - [Get Information](#get-information)
+    - [Set Device Name](#set-device-name)
+  - [Programs](#programs)
+    - [List Programs](#list-programs)
+    - [Get Program](#get-program)
+    - [Update Program](#update-program)
+    - [Enable Program](#enable-program)
+    - [Set Name for Program](#set-name-for-program)
+  - [Mode](#mode)
+    - [Get Mode](#get-mode)
+    - [Set Mode](#set-mode)
+  - [Boost](#boost)
+  - [Advance](#advance)
+  - [Holiday](#holiday)
+    - [Get Holiday Return Date](#get-holiday-return-date)
+    - [Set Holiday Return Date](#set-holiday-return-date)
+  - [Historical Data](#historical-data)
+    - [Get Historical Data](#get-historical-data)
+
+<!-- /code_chunk_output -->
+
+## Known libraries implementing the API
 
 | Language | URL | Status |
 |----------|-----|--------|
 | Python   | [https://github.com/rjpearce/timeguard-supplymaster-python](https://github.com/rjpearce/timeguard-supplymaster-python) | Under development |
 
-## Authentication
+## Contribute
+
+If you discover new information, updates of mistakes please do feel free to fork this and  enhance it for the benefit of everyone
+
+## API
+
+### Authentication
 
 This is required in order to obtain a token that you can then use to make further requests
 
@@ -62,9 +104,9 @@ export TG_USER_ID='12345'
 export TG_DEVICE_ID='0123456789'
 ```
 
-## Devices
+### Devices
 
-### List Devices
+#### List Devices
 
 ```bash
 
@@ -92,9 +134,9 @@ curl --user-agent "okhttp/3.3.1" -X GET "https://www.cloudwarm.net/TimeGuard/api
 
 ```
 
-## Device
+### Device
 
-### Get Information
+#### Get Information
 
 The Map shown in the output represents the day of the week.
 
@@ -253,7 +295,7 @@ curl --user-agent "okhttp/3.3.1" -X GET "https://www.cloudwarm.net/TimeGuard/api
 }
 ```
 
-### Set Device Name
+#### Set Device Name
 
 * Must start with a letter
 * Must be betweeen 5 to 19 characters
@@ -264,7 +306,7 @@ export TG_NAME='My Device'
 curl --user-agent "okhttp/3.3.1" -d "token=${TG_TOKEN}&user_id=${TG_USER_ID}&wifi_box_id=${TG_DEVICE_ID}&name=${TG_NAME}" -X PUT "https://www.cloudwarm.net/TimeGuard/api/Android/v_1/wifi_boxes/name"
 ```
 
-## Programs
+### Programs
 
 * A program is effectively just a schedule
 * A device can have upto 5 programs (schedules)
@@ -272,7 +314,7 @@ curl --user-agent "okhttp/3.3.1" -d "token=${TG_TOKEN}&user_id=${TG_USER_ID}&wif
 * A device can only have 1 program active
 * Deleting a program does not re-index existing programs
 
-### List Programs
+#### List Programs
 
 ```bash
 curl --user-agent "okhttp/3.3.1" -X GET "https://www.cloudwarm.net/TimeGuard/api/Android/v_1/wifi_boxes/program_list/user_id/${TG_USER_ID}/wifi_box_id/${TG_DEVICE_ID}/token/${TG_TOKEN}" | python3 -m json.tool
@@ -313,7 +355,7 @@ curl --user-agent "okhttp/3.3.1" -X GET "https://www.cloudwarm.net/TimeGuard/api
 
 ```
 
-### Get Program
+#### Get Program
 
 ```bash
 export TG_PROGRAM_ID='0'
@@ -445,7 +487,7 @@ curl --user-agent "okhttp/3.3.1" -X GET "https://www.cloudwarm.net/TimeGuard/api
 }
 ```
 
-### Update Program
+#### Update Program
 
 The Map shown in the output represents the day of the week.
 
@@ -593,14 +635,13 @@ curl --user-agent "okhttp/3.3.1" -d "token=${TG_TOKEN}&program=${TG_PROGRAM}&use
 
 ```
 
-### Enable Program
+#### Enable Program
 
 Program index starts at 0 and is not always sequential if programs have been deleted
 Validate program index exists or it will display with Unknown Name and as soon as you make it inactive it will disapeer
 
 ```bash
 export TG_PROGRAM_ID='1'
-
 curl --user-agent "okhttp/3.3.1" -d "token=${TG_TOKEN}&index=${TG_PROGRAM_ID}&user_id=${TG_USER_ID}&wifi_box_id=${TG_DEVICE_ID}" -X PUT "https://www.cloudwarm.net/TimeGuard/api/Android/v_1/wifi_boxes/program_enable"
 
 {
@@ -610,17 +651,16 @@ curl --user-agent "okhttp/3.3.1" -d "token=${TG_TOKEN}&index=${TG_PROGRAM_ID}&us
 }
 ```
 
-### Set Name for Program
+#### Set Name for Program
 
 ```bash
 export TG_PARA='{"name":"My Program","id":"2"}'
-
 curl --user-agent "okhttp/3.3.1" -d "token=${TG_TOKEN}&user_id=${TG_USER_ID}&para=${TG_PARA}&wifi_box_id=${TG_DEVICE_ID}" -X PUT "https://www.cloudwarm.net/TimeGuard/api/Android/v_1/wifi_boxes/program_name"
 ```
 
-## Mode
+### Mode
 
-### Get Mode
+#### Get Mode
 
 | Work Mode | Name                                        |
 |-----------|---------------------------------------------|
@@ -646,7 +686,7 @@ curl --user-agent "okhttp/3.3.1" -X GET "https://www.cloudwarm.net/TimeGuard/api
 }
 ```
 
-### Set Mode
+#### Set Mode
 
 | Work Mode | Name                                        |
 |-----------|---------------------------------------------|
@@ -668,7 +708,7 @@ curl --user-agent "okhttp/3.3.1" -d "work_mode=${TG_MODE}&token=${TG_TOKEN}&user
 }
 ```
 
-## Boost
+### Boost
 
 Turn on the device for 1 hour (non-configurable)
 
@@ -683,7 +723,7 @@ curl --user-agent "okhttp/3.3.1" -d "boost=${TG_BOOST}&token=${TG_TOKEN}&user_id
 }
 ```
 
-## Advance
+### Advance
 
 Turn on the device until the next scheduled off time
 
@@ -698,9 +738,9 @@ curl --user-agent "okhttp/3.3.1" -d "advance=${TG_ADVANCE}&token=${TG_TOKEN}&use
 }
 ```
 
-## Holiday
+### Holiday
 
-### Get Holiday Return Date
+#### Get Holiday Return Date
 
 ```bash
 curl --user-agent "okhttp/3.3.1" -X GET "https://www.cloudwarm.net/TimeGuard/api/Android/v_1/wifi_boxes/holiday/user_id/${TG_USER_ID}/wifi_box_id/${TG_DEVICE_ID}/token/${TG_TOKEN}" | python3 -m json.tool
@@ -716,7 +756,7 @@ curl --user-agent "okhttp/3.3.1" -X GET "https://www.cloudwarm.net/TimeGuard/api
 }
 ```
 
-### Set Holiday Return Date
+#### Set Holiday Return Date
 
 If you set enable=1 it will also change the device mode to 3 (Holiday)
 
@@ -731,9 +771,9 @@ curl --user-agent "okhttp/3.3.1" -d "holiday=${TG_HOLIDAY}&token=${TG_TOKEN}&use
 }
 ```
 
-## Historical Data
+### Historical Data
 
-### Get Historical Data
+#### Get Historical Data
 
 ```bash
 export TG_START_TIME='2020-07-08%2020:13:53'
