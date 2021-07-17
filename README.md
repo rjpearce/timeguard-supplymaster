@@ -2,6 +2,8 @@
 
 This repository contains information I have discovered about the API used by Timeguard's Supplymaster application. This is typically used to control [Timeguard's FSTWIFI Wi-Fi Controlled Fused Spur](https://www.timeguard.com/products/time/immersion-and-general-purpose-timeswitches/wi-fi-controlled-fused-spur)
 
+If you want to be able to control the device locally without Internet access take a look at the amazing work by Andrey Yantsen in this project: [timeguard-mqtt](https://github.com/andrey-yantsen/timeguard-mqtt)
+
 ## Legal Disclaimer
 
 This information is un-official and is not endorsed or associated with Timeguard Limited in any way shape or form.
@@ -53,6 +55,8 @@ The information is provided “as is”, without warranty of any kind, express o
 | Language | URL | Status |
 |----------|-----|--------|
 | Python   | [https://github.com/rjpearce/timeguard-supplymaster-python](https://github.com/rjpearce/timeguard-supplymaster-python) | Under development |
+
+If you want to be able to control the device locally without Internet access take a look at the amazing work by Andrey Yantsen in this project: [timeguard-mqtt](https://github.com/andrey-yantsen/timeguard-mqtt)
 
 ## Contribute
 
